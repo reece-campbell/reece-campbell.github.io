@@ -1,0 +1,147 @@
+<section id="docs" class="docs section">
+	<div class="container">
+	    <div class="docs-inner">
+	        <h2 class="title text-center">Get Started</h2>    
+			
+			<script>
+				var debts = [
+				{
+					"label":"Credit Card 1",
+					"startValue":9500,
+					"currentValue":6489
+				},
+				{
+					"label":"Loan",
+					"startValue":7000,
+					"currentValue":2603
+				},
+				{
+					"label":"Overdraft 1",
+					"startValue":2000,
+					"currentValue":779
+				},
+				{
+					"label":"Credit Card 2",
+					"startValue":1800,
+					"currentValue":635
+				},
+				{
+					"label":"Credit Card 3",
+					"startValue":1088,
+					"currentValue":147
+				},
+				{
+					"label":"Credit Card 4",
+					"startValue":1920,
+					"currentValue":0
+				},
+				{
+					"label":"Overdraft 2",
+					"startValue":500,
+					"currentValue":0
+				}
+			].reverse();
+				var chartData={
+					"type":"hbar",
+					"stacked":true,
+					"stack-type":"normal", 
+					"background-color":"#e0f2ff",
+					"title":{
+		                "text":"My debt with current and starting values",
+		                "background-color":"#3498db",
+						//"height":100,
+						"font-size":16,
+						"padding":20,
+						"adjust-layout":true,
+		                "font-family":"Helvetica",
+		                "alpha":0.8,
+		                "border-bottom":"2px solid #2980b9"
+		            },
+				    "scale-x":{
+				        "values":debts.map(function(debt){
+							return debt.label;
+						})
+				    },
+					"scale-y":{
+						"thousands-separator":",",
+						"format":"\u00A3%v"
+					},
+					"plot":{
+						"bars-overlap":"50%",
+					  	"value-box":{
+							"thousands-separator":",",
+							"text":"\u00A3%v"
+						}
+					},
+					"plotarea":{
+						"margin-left":"dynamic"
+					},
+					"series":[{
+					  	"values":debts.map(function(debt){
+							return debt.startValue;
+						}),
+						"legend-item":{
+					        "text":"Starting Value Total: \u00A3" + debts.reduce(function(p, c, i){return p + c.startValue;},0).toLocaleString(),
+							"font-color":"#ffffff",
+							"font-size":16
+					    },
+						"stack":1,
+						"background-color":"red",
+						//"value-box":{
+						//	"font-color":"black",
+						//	visible:false
+					  	//},
+						"tooltip" : {
+							"text" : "\u00A3%node-value",
+							"thousands-separator":","
+    					}
+					},
+					{
+					  	"values":debts.map(function(debt){
+							return debt.currentValue;
+						}),
+						"legend-item":{
+					        "text":"Current Value Total: \u00A3" + debts.reduce(function(p, c, i){return p + c.currentValue;},0).toLocaleString(),
+							"font-color":"#ffffff",
+							"font-size":16
+					    },
+					  	"stack":2,
+					  	"background-color":"green",
+					  	 "value-box":{
+						 	"font-color":"black",
+						   	"background-color":"#88ff88"//,
+						// 	  "visible":false
+					  	 },
+					  	"tooltip" : {
+							"text" : "\u00A3%node-value",
+							"thousands-separator":","
+    					}
+					}],
+					"legend":{
+					    "background-color":"#3498db",
+		                "font-family":"Helvetica",
+		                "alpha":0.7,
+					    "border-width":0,
+						"border-radius":10,
+					    "shadow":false,
+						"align": "right",
+						"vertical-align": "bottom",
+						"margin-bottom":"90"
+						
+					}
+				}
+			window.onload=function(){  // Render Method[2]
+				zingchart.render({ 
+					"id":"chartDiv",
+					"data":chartData,
+					"height":400,
+					"width":"100%",
+					"output":"html5"
+				});
+			};
+		</script>
+		<div id='chartDiv'></div>
+        </div>
+	</div>
+</section>
+			
